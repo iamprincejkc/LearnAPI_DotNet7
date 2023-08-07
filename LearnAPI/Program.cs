@@ -1,3 +1,8 @@
+using LearnAPI.Container;
+using LearnAPI.DB;
+using LearnAPI.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddDbContext<LearnApiDbContext>(o => o.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
