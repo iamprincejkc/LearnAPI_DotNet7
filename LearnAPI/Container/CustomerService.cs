@@ -10,11 +10,11 @@ namespace LearnAPI.Container
 {
     public class CustomerService : ICustomerService
     {
-        private readonly LearnApiDbContext _context;
+        private readonly LearnAPIDbContext _context;
         private readonly IMapper _mapper;
         private readonly ILogger<CustomerService> _logger;
         public int MyProperty { get; set; }
-        public CustomerService(LearnApiDbContext context, IMapper mapper,ILogger<CustomerService> logger)
+        public CustomerService(LearnAPIDbContext context, IMapper mapper,ILogger<CustomerService> logger)
         {
             _context = context;
             _mapper = mapper;

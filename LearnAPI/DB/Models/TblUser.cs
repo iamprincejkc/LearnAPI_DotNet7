@@ -33,4 +33,7 @@ public partial class TblUser
     [StringLength(50)]
     [Unicode(false)]
     public string? Role { get; set; }
+
+    [InverseProperty("User")]
+    public virtual ICollection<TblToken> TblTokens { get; set; } = new List<TblToken>();
 }

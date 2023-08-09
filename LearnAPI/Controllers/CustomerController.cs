@@ -1,5 +1,6 @@
 ﻿using LearnAPI.Model;
 using LearnAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace LearnAPI.Controllers
     //[DisableCors]
     [EnableRateLimiting("fixedWindow")]
     [Route("api/[controller]/[action]")]
+    [Authorize]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -19,6 +21,7 @@ namespace LearnAPI.Controllers
         {
             _customerService = customerService;
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get()
         {

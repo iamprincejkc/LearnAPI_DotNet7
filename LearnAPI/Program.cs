@@ -3,6 +3,7 @@ using LearnAPI.Container;
 using LearnAPI.DB;
 using LearnAPI.Helper;
 using LearnAPI.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -20,8 +21,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
-builder.Services.AddDbContext<LearnApiDbContext>(o => o.UseSqlServer(
+builder.Services.AddDbContext<LearnAPIDbContext>(o => o.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication",null);
 
 //Limit Netwrok Connections
 builder.Services.AddRateLimiter(_ => _.AddFixedWindowLimiter(policyName: "fixedWindow", options =>
@@ -57,6 +61,8 @@ app.UseCors("CorsPolicy");
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
