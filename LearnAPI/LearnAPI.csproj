@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Upload\**" />
+    <Content Remove="wwwroot\Upload\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\**" />
+    <None Remove="wwwroot\Upload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
@@ -28,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="DB\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
