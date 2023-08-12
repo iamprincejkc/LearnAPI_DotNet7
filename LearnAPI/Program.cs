@@ -15,6 +15,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Scaffold
+//"Scaffold-DbContext 'Name=DefaultConnection' Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB/Models -context LearnAPIDbContext -f -contextDir DB -DataAnnotations"
+
 // Add services to the container.
 
 //Logging
