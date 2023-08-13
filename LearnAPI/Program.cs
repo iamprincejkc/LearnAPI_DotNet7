@@ -106,12 +106,25 @@ builder.Services.AddSwaggerGen(option =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.MapGet("/api/Minimal", () => "JKC");
+app.MapGet("/api/Welcome", (string name) => "Welcome " + name).WithOpenApi(op =>
 {
+    var param = op.Parameters[0];
+    param.Description = "Enter you name";
+    return op;
+});
+app.MapGet("/api/GetCustomers", async (LearnAPIDbContext db) =>
+{
+    return await db.TblCustomers.ToListAsync();
+});
+
+// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseStaticFiles();
 
